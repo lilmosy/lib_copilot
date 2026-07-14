@@ -1,0 +1,398 @@
+[
+  {
+    "searched_callno": "174.4",
+    "total_in_catalog": 293,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 243
+  },
+  {
+    "searched_callno": "332.024",
+    "total_in_catalog": 1145,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 1095
+  },
+  {
+    "searched_callno": "332.6",
+    "total_in_catalog": 5866,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 5816
+  },
+  {
+    "searched_callno": "029.4",
+    "total_in_catalog": 1,
+    "collected": 1,
+    "pages_crawled": 1,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  },
+  {
+    "searched_callno": "028",
+    "total_in_catalog": 1699,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 1649
+  },
+  {
+    "searched_callno": "028.9",
+    "total_in_catalog": 309,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 259
+  },
+  {
+    "searched_callno": "641.3383",
+    "total_in_catalog": 11,
+    "collected": 11,
+    "pages_crawled": 2,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  },
+  {
+    "searched_callno": "641.338309",
+    "total_in_catalog": 3,
+    "collected": 0,
+    "pages_crawled": 1,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 3
+  },
+  {
+    "searched_callno": "663.1",
+    "total_in_catalog": 11,
+    "collected": 13,
+    "pages_crawled": 2,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  },
+  {
+    "searched_callno": "641.210951",
+    "total_in_catalog": 39,
+    "collected": 39,
+    "pages_crawled": 4,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  },
+  {
+    "searched_callno": "720.105",
+    "total_in_catalog": 7,
+    "collected": 7,
+    "pages_crawled": 1,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  },
+  {
+    "searched_callno": "720.2",
+    "total_in_catalog": 297,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 247
+  },
+  {
+    "searched_callno": "720.1",
+    "total_in_catalog": 164,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 114
+  },
+  {
+    "searched_callno": "720.563",
+    "total_in_catalog": null,
+    "collected": 0,
+    "pages_crawled": 0,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  },
+  {
+    "searched_callno": "711.4",
+    "total_in_catalog": 356,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 306
+  },
+  {
+    "searched_callno": "363.19262",
+    "total_in_catalog": null,
+    "collected": 0,
+    "pages_crawled": 0,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  },
+  {
+    "searched_callno": "363.192",
+    "total_in_catalog": 53,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 3
+  },
+  {
+    "searched_callno": "363.19",
+    "total_in_catalog": 68,
+    "collected": 14,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 54
+  },
+  {
+    "searched_callno": "363",
+    "total_in_catalog": 4195,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 4145
+  },
+  {
+    "searched_callno": "102",
+    "total_in_catalog": 660,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 610
+  },
+  {
+    "searched_callno": "794.8",
+    "total_in_catalog": 852,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 802
+  },
+  {
+    "searched_callno": "794.801",
+    "total_in_catalog": 12,
+    "collected": 12,
+    "pages_crawled": 2,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  },
+  {
+    "searched_callno": "781.63",
+    "total_in_catalog": 231,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 181
+  },
+  {
+    "searched_callno": "780.2",
+    "total_in_catalog": 213,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 163
+  },
+  {
+    "searched_callno": "796",
+    "total_in_catalog": 3284,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 3234
+  },
+  {
+    "searched_callno": "780.4202",
+    "total_in_catalog": null,
+    "collected": 0,
+    "pages_crawled": 0,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  },
+  {
+    "searched_callno": "792.02",
+    "total_in_catalog": 725,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 675
+  },
+  {
+    "searched_callno": "381.45002",
+    "total_in_catalog": 144,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 94
+  },
+  {
+    "searched_callno": "658.827",
+    "total_in_catalog": 651,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 601
+  },
+  {
+    "searched_callno": "306.446",
+    "total_in_catalog": 55,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 5
+  },
+  {
+    "searched_callno": "401.93",
+    "total_in_catalog": 14,
+    "collected": 14,
+    "pages_crawled": 2,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  },
+  {
+    "searched_callno": "407",
+    "total_in_catalog": 173,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 123
+  },
+  {
+    "searched_callno": "400.42",
+    "total_in_catalog": 47,
+    "collected": 47,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  },
+  {
+    "searched_callno": "400.7",
+    "total_in_catalog": 371,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 321
+  },
+  {
+    "searched_callno": "400.72",
+    "total_in_catalog": 33,
+    "collected": 33,
+    "pages_crawled": 4,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  },
+  {
+    "searched_callno": "370.117",
+    "total_in_catalog": 126,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 76
+  },
+  {
+    "searched_callno": "650.1",
+    "total_in_catalog": 3805,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 3755
+  },
+  {
+    "searched_callno": "179.9",
+    "total_in_catalog": 711,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 661
+  },
+  {
+    "searched_callno": "332.6324",
+    "total_in_catalog": 888,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 838
+  },
+  {
+    "searched_callno": "811.36",
+    "total_in_catalog": 1578,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 1528
+  },
+  {
+    "searched_callno": "291.13",
+    "total_in_catalog": 182,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 132
+  },
+  {
+    "searched_callno": "028.1",
+    "total_in_catalog": 680,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 630
+  },
+  {
+    "searched_callno": "883",
+    "total_in_catalog": 286,
+    "collected": 50,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": true,
+    "missed": 236
+  },
+  {
+    "searched_callno": "883.01",
+    "total_in_catalog": 41,
+    "collected": 41,
+    "pages_crawled": 5,
+    "max_pages": 5,
+    "truncated": false,
+    "missed": 0
+  }
+]
