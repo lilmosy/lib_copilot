@@ -38,7 +38,26 @@
 
 ---
 
-## 2. 실제 업무 프로세스 = 파이프라인
+## 2. 시스템 개요 — 입력 → 출력 & 업무 프로세스
+
+### 한눈에 보는 입출력
+
+```
+[입력] 신규 도서 서지정보 (BookInput)
+   예) 제목「가장 인간적인 도시」 · 부제「…AI시대 건축」 · 저자 정현재 · 082=720.105
+    │
+    ▼  ① 1차 retrieve  (recall 넓게)   → 후보 청구기호 + 각 번호대 샘플 책
+    │     예) 후보 {720.105(082), 720.2, 711.4} + 각 번호대 책 제목들
+    ▼  ② 2차 classify (Claude, 판단)   → ▼h 후보 + 근거 + 에스컬레이션
+    │
+[출력] ClassificationResult
+   예) [1] 720.2 도시·건축(교양) 0.60  [2] 720.105 …  → escalate: needs_toc(HITL)
+```
+
+- **입력**은 서지정보(제목·부제·저자·082 등) JSON 한 건. **출력**은 ▼h 후보 목록 + 근거 + HITL 여부.
+- 정답셋(`data/scenarios/*.json`)은 이 입력에 `expected`(정답)를 붙인 형태. 평가는 출력 최상위 ▼h vs `expected`를 비교.
+
+### 업무 프로세스 (이 흐름을 파이프라인으로 이식)
 
 하/중 난이도 케이스의 공통 패턴은 **파이프라인화가 가능**하다 (케이스 분석 부록1):
 
@@ -193,9 +212,74 @@ lib_copilot/
 
 ## 8. 빌드 순서
 
-- **M0 — 스켈레톤 관통** ← 현재. schema 확정 + 시드 DB + 케이스5 골든셋 + 더미 배선(멘트까지).
-- **M1 — 검색(retrieve)** 실제화. 케이스5에서 720.2 분포/개수가 그럴듯하게 나오는지.
-- **M2 — classify(Claude)** 연결. 후보+근거+에스컬레이션 판정.
-- **M3 — evaluate** 골든셋 리포트 → 오분류 분석 → 프롬프트/검색 개선 반복.
-- **M4 — 크롤링 연동** 시드 DB를 실제 로욜라 검색 결과로 확장.
+- **M0 스켈레톤 관통** ✅ · **M1 크롤 DB(1682건)** ✅ · **M2 funnel+classify 관통** ✅ · **M3 evaluate(3케이스)** ✅
+- **다음:** V2(임베딩) 구현·비교 · 상 케이스 골든셋 확충 · analyze(키워드 추출) 단계 정식화 · shelf_sample 대표성.
+
+---
+
+## 9. 데이터 계약 (schema) — `src/schema.py`
+
+단계 간에 오가는 타입. 내부 구현이 바뀌어도 이 계약은 고정한다.
+
+### 9.1 BookInput (입력)
+```jsonc
+{
+  "title": "가장 인간적인 도시",
+  "subtitle": "실리콘밸리의 젊은 건축가가 안내하는 AI시대 건축",
+  "author": "정현재",
+  "ddc_082": "720.105",     // 선택: 업체 DDC(prior). 없으면 null
+  "is_translation": false,
+  "original_title": null, "original_lang": null,
+  "keywords": [], "toc": [], "description": null   // 상 케이스에서만 채워질 수 있음
+}
 ```
+> ⚠️ `keywords`의 출처는 미정(열린 질문 §5). 현재 골든셋의 keywords는 셋업 시 수기로 넣은 것 → analyze 단계(LLM 키워드 추출)로 정식화 필요.
+
+### 9.2 RetrieveResult (① 1차 산출물)
+```jsonc
+{
+  "retriever": "token",              // token | embed
+  "query_terms": ["도시","건축", ...],
+  "messages": ["082(720.105) 있음 → …"],   // 진행 멘트(XAI)
+  "total_title_hits": 4,
+  "candidates": [                    // 후보 청구기호 + 근거
+    { "ddc_h": "720.2", "is_082_prior": false,
+      "title_hit_count": 3,          // 제목 매칭이 이 번호 가리킨 수
+      "shelf_count": 50,             // DB 이 번호대 책 수(상한 샘플 → 부정확)
+      "title_hits": ["…"], "shelf_sample": ["…"] }  // 주제 파악용 책 제목
+  ]
+}
+```
+
+### 9.3 ClassificationResult (② 2차 산출물 = 출력)
+```jsonc
+{
+  "candidates": [                    // 적합도 내림차순
+    { "h": "720.2", "label": "도시·건축(교양)", "confidence": 0.60,
+      "source": "title_match",       // 082_kept | 082_rejected | title_match | inherited
+      "reasoning": "…대중 교양서라 교양 서가…", "similar_refs": ["…"] }
+  ],
+  "ambiguity": 0.3,                  // 0(명확)~1(모호)
+  "escalate": true,                  // HITL 필요?
+  "signals": ["needs_toc"],          // cross_major | needs_toc | scattered_dist | org_disagree
+  "notes": "종합 판단 근거 요약"
+}
+```
+
+---
+
+## 10. 구성 모듈 상세
+
+> 경계는 "정해진 입력 → 정해진 출력"의 순수 함수. 내부만 갈아끼운다.
+
+| 모듈 | 역할 | 입력 → 출력 | 구현 요점 |
+|---|---|---|---|
+| `crawler/callno_crawler.py` | DB 수집 | 청구기호 리스트 → collection.json/csv + coverage | `st=FRNT` 검색 + verified 쿠키 우회, 번호대별 5p 샘플 |
+| `retrieve_token.py` (V1) | 1차 recall | BookInput → RetrieveResult | 제목 토큰 겹침 ≥`MIN_OVERLAP`, 컷 없이 넓게, 082 prior 포함, 번호별 grouping |
+| `retrieve_embed.py` (V2) | 1차 recall | BookInput → RetrieveResult | 임베딩 의미 유사(백엔드 결정 후). "AI시대↔인공지능시대" 잡음 |
+| `classify.py` ★ | 2차 판단 | BookInput+RetrieveResult → ClassificationResult | **유일한 LLM.** 주제+급/장르 판단, 개수 보조, 규칙 주입, 에스컬레이션 |
+| `pipeline.py` | 배선 | BookInput → (retrieve+classify) | `config.RETRIEVER`로 1차 스위치 |
+| `run.py` | 실행기 | 골든셋 경로 → 콘솔 + output/ json | 케이스 실행·덤프 |
+| `evaluate.py` | 평가 | scenarios/*.json → Exact/Prefix/Top-k | 검색기별 비교. gold 두 층(작성자/교열) |
+| `schema.py` | 데이터 계약 | — | §9. 최우선 고정 |
+| `config.py` | 설정 | — | 모델·경로·RETRIEVER·MIN_OVERLAP·SHELF_SAMPLE |
