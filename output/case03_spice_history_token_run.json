@@ -1,0 +1,106 @@
+{
+  "input": {
+    "title": "향신료의 역사",
+    "subtitle": null,
+    "author": "Balard, Michel",
+    "publisher": null,
+    "pub_year": null,
+    "is_translation": true,
+    "original_title": "Histoire des épices au Moyen Âge",
+    "original_lang": "fre",
+    "ddc_082": "641.3383",
+    "keywords": [
+      "향신료",
+      "역사",
+      "중세"
+    ],
+    "toc": [],
+    "description": null
+  },
+  "expected": {
+    "writer_final": "641.338309",
+    "review_final": "641.338309",
+    "difficulty": "하",
+    "escalate_expected": false,
+    "note": "082(641.3383)를 기존 유사서(향신료 역사류 641.338309)에 맞춰 미세 확장. 후보 사실상 단일이라 난도 낮음. ← 세분 번호가 정답: '급/장르' 프롬프트가 이걸 더 coarse한 641.3383로 밀지 않는지 검증 대상."
+  },
+  "retrieve": {
+    "retriever": "token",
+    "query_terms": [
+      "역사",
+      "중세",
+      "향신료",
+      "향신료의"
+    ],
+    "messages": [
+      "082(641.3383) 있음 → 청구기호 검색으로 의미 확인 (본교에 해당 번호대 책 있음).",
+      "제목 매칭 1건 → 후보 번호 2개."
+    ],
+    "total_title_hits": 1,
+    "candidates": [
+      {
+        "ddc_h": "641.3383",
+        "is_082_prior": true,
+        "title_hit_count": 0,
+        "shelf_count": 8,
+        "title_hits": [],
+        "shelf_sample": [
+          "Out of the East : spices and the medieval imagination",
+          "천연향신료",
+          "Spice 化學의 硏究",
+          "Spice : 알면 더 맛있는, 향신료 사전",
+          "향신료 과학 : 요리의 혁신을 가져올 향신료 블렌딩의 모든 것",
+          "향신료 전쟁 : 세계화, 제국주의, 주식회사를 탄생시킨 향신료 탐욕사",
+          "향신료 : 요리의 혁신을 가져올 향신료 블렌딩의 모든 것",
+          "향신료, 인류사를 수놓은 맛과 향의 프리즘"
+        ]
+      },
+      {
+        "ddc_h": "641.338309",
+        "is_082_prior": false,
+        "title_hit_count": 1,
+        "shelf_count": 3,
+        "title_hits": [
+          "향신료의 역사"
+        ],
+        "shelf_sample": [
+          "스파이스: 향신료에 매혹된 사람들이 만든 욕망의 역사",
+          "향신료의 지구사",
+          "향신료의 역사"
+        ]
+      }
+    ]
+  },
+  "result": {
+    "candidates": [
+      {
+        "h": "641.338309",
+        "label": "향신료(식품)의 역사",
+        "confidence": 0.9,
+        "source": "title_match",
+        "reasoning": "이 번호대 샘플이 「향신료의 역사」, 「향신료의 지구사」, 「스파이스: 욕망의 역사」로 모두 '향신료의 역사' 주제로 수렴합니다. 입력 도서 제목 '향신료의 역사'(중세 향신료사)와 성격·초점이 정확히 일치하며, .09(역사) 세분이 입력의 역사 서술 성격에 맞습니다. 동일 제목이 이미 이 번호대에 있어 기존 서지 승계 가능성도 높습니다.",
+        "similar_refs": [
+          "향신료의 역사",
+          "향신료의 지구사",
+          "스파이스: 향신료에 매혹된 사람들이 만든 욕망의 역사"
+        ]
+      },
+      {
+        "h": "641.3383",
+        "label": "향신료(식품 일반)",
+        "confidence": 0.5,
+        "source": "082_rejected",
+        "reasoning": "업체 082 prior이나, 이 번호대 샘플은 「천연향신료」, 「Spice 化學의 硏究」, 「향신료 사전」, 「향신료 과학」 등 향신료의 성분·요리·사전 등 일반/과학서가 주류입니다. 「Out of the East」, 「향신료 전쟁」 등 역사서도 일부 섞여 있으나, 입력 도서의 '역사' 초점에는 .09 세분(641.338309)이 더 정확합니다.",
+        "similar_refs": [
+          "Out of the East : spices and the medieval imagination",
+          "향신료 전쟁",
+          "향신료, 인류사를 수놓은 맛과 향의 프리즘"
+        ]
+      }
+    ],
+    "ambiguity": 0.2,
+    "escalate": false,
+    "signals": [],
+    "notes": "입력 도서는 '향신료의 역사'(중세)로 역사 서술이 초점이므로, 역사 세분(.09)이 붙고 동일 제목이 이미 존재하는 641.338309가 최적입니다. 업체 082(641.3383)는 향신료 일반/과학·사전 서가로 성격이 달라 후순위로 두었습니다. 두 후보 모두 641.3383대 내 동일 주제 세분 차이일 뿐 대분류를 넘지 않아 에스컬레이션은 불필요합니다."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "retriever": "token",
+  "query_terms": [
+    "역사",
+    "중세",
+    "향신료",
+    "향신료의"
+  ],
+  "messages": [
+    "082(641.3383) 있음 → 청구기호 검색으로 의미 확인 (본교에 해당 번호대 책 있음).",
+    "제목 매칭 1건 → 후보 번호 2개."
+  ],
+  "total_title_hits": 1,
+  "candidates": [
+    {
+      "ddc_h": "641.3383",
+      "is_082_prior": true,
+      "title_hit_count": 0,
+      "shelf_count": 8,
+      "title_hits": [],
+      "shelf_sample": [
+        "Out of the East : spices and the medieval imagination",
+        "천연향신료",
+        "Spice 化學의 硏究",
+        "Spice : 알면 더 맛있는, 향신료 사전",
+        "향신료 과학 : 요리의 혁신을 가져올 향신료 블렌딩의 모든 것",
+        "향신료 전쟁 : 세계화, 제국주의, 주식회사를 탄생시킨 향신료 탐욕사",
+        "향신료 : 요리의 혁신을 가져올 향신료 블렌딩의 모든 것",
+        "향신료, 인류사를 수놓은 맛과 향의 프리즘"
+      ]
+    },
+    {
+      "ddc_h": "641.338309",
+      "is_082_prior": false,
+      "title_hit_count": 1,
+      "shelf_count": 3,
+      "title_hits": [
+        "향신료의 역사"
+      ],
+      "shelf_sample": [
+        "스파이스: 향신료에 매혹된 사람들이 만든 욕망의 역사",
+        "향신료의 지구사",
+        "향신료의 역사"
+      ]
+    }
+  ]
+}

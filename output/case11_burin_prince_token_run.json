@@ -1,0 +1,109 @@
+{
+  "input": {
+    "title": "부린 왕자",
+    "subtitle": null,
+    "author": "조훈희",
+    "publisher": null,
+    "pub_year": null,
+    "is_translation": false,
+    "original_title": null,
+    "original_lang": null,
+    "ddc_082": "650.1",
+    "keywords": [],
+    "toc": [],
+    "description": null
+  },
+  "expected": {
+    "writer_final": "179.9",
+    "review_final": "332.6324",
+    "difficulty": "상",
+    "escalate_expected": true,
+    "note": "문학(우화)/부동산/성찰 3파전. 작성자 179.9(성찰) → 교열 332.6324(부동산, 뒤집힘). 정교한 논증조차 정답을 담보 못 하는 최상위 난도 → 후보+근거 병기 필수. 정답 하나 맞히기가 아니라 Top-k+에스컬레이션으로 평가."
+  },
+  "retrieve": {
+    "retriever": "token",
+    "query_terms": [
+      "부린",
+      "왕자"
+    ],
+    "messages": [
+      "082(650.1) 있음 → 청구기호 검색으로 의미 확인 (본교에 해당 번호대 책 있음).",
+      "제목 매칭 0건 → 후보 번호 1개."
+    ],
+    "total_title_hits": 0,
+    "candidates": [
+      {
+        "ddc_h": "650.1",
+        "is_082_prior": true,
+        "title_hit_count": 0,
+        "shelf_count": 50,
+        "title_hits": [],
+        "shelf_sample": [
+          "Buy-in : saving your good idea from getting shot down",
+          "The 10 laws of enduring success",
+          "Innovation Story",
+          "성공하는 점심형 인간",
+          "30대, 평생 일자리에 목숨 걸어라",
+          "World Wide Rave : Creating Triggers that Get Millions of People to Spread Your Ideas and Share Your Stories",
+          "You're hired : how to succeed in business and life",
+          "Die heimlichen Spielregeln der Karriere : wie Sie die ungeschriebenen Gesetze am Arbeitsplatz fu@r Ihren Erfolg nutzen / 3., aktualisierte und erw. Aufl",
+          "바보라도 연봉 1억을 받을 수 있다",
+          "영웅의 꿈을 스캔하라",
+          "나는 글로벌 프로페셔널, 싱가포르로 출근한다",
+          "인생의 모든 전략은 20대에 결정된다",
+          "지혜의 주머니를 열다 慧囊錄",
+          "경영학보다는 소설에서 배워라: 명작에서 훔친 위대한 통찰",
+          "A4 솔루션: 프로들의 업무 파워",
+          "방미의 골든타임: 당신의 꿈이 현실이 되는 기막힌 순간",
+          "(리얼시추에이션) 신입사원 필살기: 선배들이 직접 터득한 신입사원 생존비법",
+          "공피고아: 어떤 조직에서도 승승장구하는 사람들의 비책",
+          "부하의 자격: 상사와 함께 성공하는 직장생활 생존전략",
+          "굿바이 무력감: 심리 카운슬러가 알려주는 의욕처방전",
+          "5분미팅: 직장에서 성공하는 열쇠!",
+          "(공병호) 벽을 넘는 기술: 돈·직업·생활의 위기를 해결하는 18가지 리스크 관리법",
+          "비즈니스 현실감각",
+          "상추 CEO: 상추로 매출 100억을 일군 유기농업계의 신화 장안농장 이야기",
+          "천재반을 위한 Time management",
+          "(대한민국 미생들에게 주는) 7가지 선물",
+          "Stupid, ugly, unlucky, and rich : spike's guide to success : what really leads to success - and it's not smarts, looks, or luck",
+          "이미 넌, 위대한 생존자 : 진화의학자 닥터 로빈이 전해 주는 행복과 성공의 원리",
+          "리치!",
+          "마중물: 마음을 여는 신뢰의 물",
+          "(우리가 함께 이루는) 좋은 성공",
+          "Plugged in: the Generation Y guide to thriving at work",
+          "3분 古典 : 내 인생을 바꾸는 모멘텀(Momentum)",
+          "잠자기 전 30분: 내일이 바뀌는 새로운 습관",
+          "(우리들의 영업비밀) 섬김경영",
+          "귀차니스트 탐구생활",
+          "(울타리 밖의 성공방식) 커닝",
+          "7일만에 끝내는 자기계발 실천노트",
+          "브레인스티어링",
+          "A perfect mess : the hidden benefits of disorder : how crammed closets, cluttered offices, and on-the-fly planning make the world a better place"
+        ]
+      }
+    ]
+  },
+  "result": {
+    "candidates": [
+      {
+        "h": "650.1",
+        "label": "경영·직업 성공/자기계발(성공학·처세)",
+        "confidence": 0.45,
+        "source": "082_kept",
+        "reasoning": "이 번호대 샘플은 「성공하는 점심형 인간」, 「신입사원 필살기」, 「부하의 자격」, 「굿바이 무력감」 등 직장·성공·자기계발 대중 실용서가 주류입니다. 제목 '부린 왕자'가 만약 '부(富)/부동산 재테크 성공기'를 어린왕자에 빗댄 대중 자기계발·재테크 성공담이라면 이 성공학 서가와 결이 맞습니다. 다만 부제·목차·키워드가 전무해 주제 확정이 어렵습니다.",
+        "similar_refs": [
+          "성공하는 점심형 인간",
+          "부하의 자격",
+          "방미의 골든타임"
+        ]
+      }
+    ],
+    "ambiguity": 0.8,
+    "escalate": true,
+    "signals": [
+      "needs_toc",
+      "cross_major"
+    ],
+    "notes": "'부린 왕자'는 '어린 왕자'를 패러디한 제목으로 보이나, 부제·목차·키워드가 전혀 없어 실제 초점(부동산/재테크 성공담인지, 자기계발 우화인지, 창작 소설·에세이인지) 판별이 불가능합니다. 유일 후보인 650.1(성공학·자기계발)은 082 prior와 대중 실용서 서가 성격상 가장 근접하나 확신할 수 없어 confidence를 낮췄습니다. 소설/에세이(800대)나 부동산 재테크(330대)로 갈릴 수 있는 대분류 교차 가능성이 있어 목차/책소개 확보 후 사서 최종 판단이 필요합니다."
+  }
+}

@@ -24,6 +24,3 @@ env/
 *.log
 .ipynb_checkpoints/
 .pytest_cache/
-
-# 실행 run 덤프(재생성 가능) — 분석 md만 추적
-output/*.json
