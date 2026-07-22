@@ -1,3 +1,7 @@
 anthropic>=0.69
 pydantic>=2.0
 python-dotenv>=1.0
+pandas>=2.0          # db.py 내부 전용(분포 groupby) + Streamlit 표. 밖으로 안 샘
+streamlit>=1.40      # 데모 UI (app.py)
+requests>=2.31       # crawler
+beautifulsoup4>=4.12 # crawler

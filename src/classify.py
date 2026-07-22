@@ -61,7 +61,11 @@ def _format_candidates(r: RetrieveResult) -> str:
     return "\n".join(lines)
 
 
-def _build_prompt(book: BookInput, r: RetrieveResult) -> str:
+def _build_prompt(book: BookInput, r: RetrieveResult,
+                  human_notes: str | None = None) -> str:
+    # human_notes는 데모 경로(app.py)에서 '사서가 앞 단계에서 내린 판정'을 넘길 때만 붙는다.
+    # 평가 경로(run.py/evaluate.py)는 None으로 두어 프롬프트가 한 글자도 달라지지 않게 한다.
+    trace = f"\n\n[사서가 앞 단계에서 이미 판정한 것]\n{human_notes}\n" if human_notes else ""
     return f"""[분류 대상 도서]
 - 제목: {book.title}
 - 부제: {book.subtitle or "-"}
@@ -72,13 +76,19 @@ def _build_prompt(book: BookInput, r: RetrieveResult) -> str:
 - 목차/책소개: {", ".join(book.toc) or (book.description or "-")}
 
 [1차 검색이 좁힌 후보 청구기호]
-{_format_candidates(r)}
+{_format_candidates(r)}{trace}
 
 각 후보 번호대의 책 제목들로 '주제'를 파악하고, 입력 도서와 가장 맞는 ▼h 후보와 판단 근거, 에스컬레이션 판정을 제시하세요. 개수보다 주제 적합을 우선하세요."""
 
 
-def classify(book: BookInput, r: RetrieveResult) -> ClassificationResult:
-    """도서 + 1차 후보 → ▼h 후보 목록(근거 + 에스컬레이션 판정)."""
+def classify(book: BookInput, r: RetrieveResult,
+             human_notes: str | None = None) -> ClassificationResult:
+    """도서 + 1차 후보 → ▼h 후보 목록(근거 + 에스컬레이션 판정).
+
+    human_notes: 사서가 앞 단계에서 내린 판정(데모 경로 전용, 선택).
+      예) "082(720.105)를 2단계에서 '주제 align 안 됨'으로 기각함."
+      기본 None → 평가 경로의 프롬프트는 이전과 완전히 동일하다(점수 불변).
+    """
     response = _client.messages.parse(
         model=MODEL,
         max_tokens=MAX_TOKENS,
@@ -86,7 +96,7 @@ def classify(book: BookInput, r: RetrieveResult) -> ClassificationResult:
         system=[
             {"type": "text", "text": _SYSTEM, "cache_control": {"type": "ephemeral"}}
         ],
-        messages=[{"role": "user", "content": _build_prompt(book, r)}],
+        messages=[{"role": "user", "content": _build_prompt(book, r, human_notes)}],
         output_format=ClassificationResult,
     )
     return response.parsed_output

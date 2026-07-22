@@ -103,3 +103,39 @@ class ClassificationResult(BaseModel):
     escalate: bool = Field(default=False, description="HITL 필요 여부")
     signals: list[EscalationSignal] = Field(default_factory=list)
     notes: str | None = None
+
+
+# ── ④ 저장소(db.py) 계약 ──────────────────────────────────
+# db.py 내부가 pandas든 SQLite든, 밖으로는 아래 타입만 나간다.
+class CollectionBook(BaseModel):
+    """본교 장서 DB(collection.json) 한 건 = 이미 청구기호가 붙은 책."""
+
+    id: str
+    title: str
+    author: str = ""
+    publisher: str = ""
+    pub_year: str = ""
+    call_number: str = Field(default="", description="전체 청구기호 ▼h+▼i+▼m")
+    ddc_h: str = Field(description="분류기호만 (▼h)")
+    searched_callno: str = Field(default="", description="어느 번호 검색에서 걸렸나")
+    detail: dict[str, str] = Field(
+        default_factory=dict,
+        description="상세페이지 원자료(th/td 통째로). 상세크롤 전에는 빈 dict",
+    )
+
+
+class DistBucket(BaseModel):
+    """제목 검색 결과의 청구기호별 분포 한 칸. '720.2가 6권' 같은.
+
+    사서 업무 3단계('분포는 A/B/C 각각 x/y/z개')의 A·B·C 하나에 해당.
+    """
+
+    ddc_h: str
+    count: int = Field(description="이 번호를 가리킨 책 수")
+    books: list[CollectionBook] = Field(
+        default_factory=list, description="이 번호에 걸린 책들"
+    )
+    shelf_sample: list[str] = Field(
+        default_factory=list, description="이 번호대 서가의 책 제목 (의미 파악용)"
+    )
+    shelf_count: int = Field(default=0, description="DB 이 번호대 총 책 수(샘플 상한)")
