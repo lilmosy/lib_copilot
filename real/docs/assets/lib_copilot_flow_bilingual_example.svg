@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2600" height="1580" viewBox="0 0 2600 1580" role="img" aria-labelledby="title desc">
+  <title id="title">lib_copilot 흐름 - 이중언어 도서 예시</title>
+  <desc id="desc">신규 도서 어느 완벽한 이중언어자가 기존 판본 승계, 082, 종합서지, 키워드 후보 확장을 거쳐 사서 검토와 미래 지식 축적으로 이어지는 흐름이다.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}.title{font:700 48px Arial,'Noto Sans KR',sans-serif;fill:#102b57}.sub{font:500 22px Arial,'Noto Sans KR',sans-serif;fill:#52637d}.head{font:700 25px Arial,'Noto Sans KR',sans-serif;fill:#fff}.section{font:700 23px Arial,'Noto Sans KR',sans-serif;fill:#17233a}.body{font:500 18px Arial,'Noto Sans KR',sans-serif;fill:#243247}.small{font:500 15px Arial,'Noto Sans KR',sans-serif;fill:#526277}.mini{font:500 14px Arial,'Noto Sans KR',sans-serif;fill:#526277}.tag{font:700 15px Arial,'Noto Sans KR',sans-serif;fill:#fff}.tcode{font:700 15px Arial,'Noto Sans KR',sans-serif;fill:#2563eb}.tllm{font:700 15px Arial,'Noto Sans KR',sans-serif;fill:#7c3aed}.thitl{font:700 15px Arial,'Noto Sans KR',sans-serif;fill:#c2410c}.tthreshold{font:700 15px Arial,'Noto Sans KR',sans-serif;fill:#dc2626}.arrow{stroke:#55647c;stroke-width:4;fill:none;marker-end:url(#arrow)}.darrow{stroke:#d97706;stroke-width:3.5;fill:none;stroke-dasharray:10 8;marker-end:url(#orange)}.line{stroke:#cbd5e1;stroke-width:1.5}
+    </style>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#64748b" flood-opacity=".2"/></filter>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="10" refY="4" orient="auto"><path d="M0 0 L11 4 L0 8 Z" fill="#55647c"/></marker>
+    <marker id="orange" markerWidth="11" markerHeight="11" refX="10" refY="4" orient="auto"><path d="M0 0 L11 4 L0 8 Z" fill="#d97706"/></marker>
+  </defs>
+  <rect class="bg" width="2600" height="1580"/>
+  <text x="1300" y="70" text-anchor="middle" class="title">lib_copilot 흐름</text>
+  <text x="1300" y="110" text-anchor="middle" class="sub">예시: 「어느 완벽한 이중언어자」 · 후보 탐색과 정책은 CODE, 서가 적합도 평가는 LLM</text>
+
+  <!-- Input -->
+  <g filter="url(#shadow)">
+    <rect x="45" y="165" width="310" height="1210" rx="18" fill="#eef5ff" stroke="#8fb5ec" stroke-width="2"/>
+    <rect x="45" y="165" width="310" height="66" rx="18" fill="#1e4d94"/>
+    <text x="200" y="207" text-anchor="middle" class="head">신규 도서 입력</text>
+    <rect x="72" y="260" width="256" height="370" rx="13" fill="#fff" stroke="#bfd6f4"/>
+    <text x="100" y="303" class="section">BookInput</text>
+    <line x1="96" x2="304" y1="322" y2="322" class="line"/>
+    <text x="100" y="360" class="body">제목</text><text x="100" y="389" class="small">어느 완벽한 이중언어자</text>
+    <text x="100" y="435" class="body">부제</text><text x="100" y="464" class="small">한 권으로 보는 2개 언어의</text><text x="100" y="486" class="small">모든 것</text>
+    <text x="100" y="531" class="body">저자</text><text x="100" y="560" class="small">주 앨리스</text>
+    <text x="100" y="606" class="body">업체 082</text><text x="100" y="635" class="body">306.446</text>
+    <rect x="72" y="670" width="256" height="146" rx="13" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="100" y="712" class="tcode">CODE · 입력 보강</text>
+    <text x="100" y="749" class="small">책소개·부제·원제의 빈 칸만</text><text x="100" y="776" class="small">알라딘에서 보강</text>
+    <rect x="72" y="855" width="256" height="314" rx="13" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="100" y="897" class="section">LLM 전달 책 내용</text>
+    <text x="100" y="934" class="tcode">CODE · book_content_block()</text>
+    <text x="100" y="973" class="body">제목 · 부제 · 저자</text>
+    <text x="100" y="1003" class="body">번역서 여부 · 원제</text>
+    <text x="100" y="1033" class="body">키워드 · 목차 · 책소개</text>
+    <line x1="96" x2="304" y1="1060" y2="1060" class="line"/>
+    <text x="100" y="1101" class="small">082는 후보 검색용 힌트</text>
+    <text x="100" y="1128" class="small">LLM에는 전달하지 않음</text>
+  </g>
+
+  <!-- stage 0 -->
+  <g filter="url(#shadow)">
+    <rect x="395" y="165" width="410" height="1210" rx="18" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+    <rect x="395" y="165" width="410" height="68" rx="18" fill="#2563eb"/>
+    <text x="600" y="208" text-anchor="middle" class="head">#0 · 기존 판본/원서 승계 검색</text>
+    <rect x="423" y="270" width="354" height="146" rx="13" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="447" y="312" class="tcode">CODE · sogang_db.find_inheritance()</text>
+    <text x="447" y="350" class="body">원서·기존 판본이 본교에 있는가?</text><text x="447" y="383" class="small">LLM 호출 없음</text>
+    <path d="M507 515 L600 463 L693 515 L600 567 Z" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+    <text x="600" y="522" text-anchor="middle" class="section">기존 판본 발견?</text>
+    <path class="arrow" d="M693 515 H830 V345 H873"/>
+    <text x="720" y="497" class="small">아니오 → #1 진행</text>
+    <rect x="438" y="610" width="325" height="144" rx="13" fill="#f0fdf4" stroke="#22c55e"/>
+    <text x="600" y="653" text-anchor="middle" class="section">승계 결과</text>
+    <text x="600" y="687" text-anchor="middle" class="small">기존 청구기호 그대로 확정</text><text x="600" y="714" text-anchor="middle" class="small">LLM-F·키워드 검색을 하지 않음</text>
+    <path class="arrow" d="M600 567 V605"/>
+    <text x="620" y="590" class="small">예</text>
+    <rect x="423" y="810" width="354" height="230" rx="13" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="447" y="852" class="section">이 예시의 결과</text>
+    <text x="447" y="891" class="small">기존 판본/원서 없음</text><text x="447" y="920" class="small">→ #1 082 후보를 본교 서가에서 확인</text>
+    <text x="447" y="967" class="mini">골든셋 평가는 같은 책 본인을</text><text x="447" y="990" class="mini">holdout해서 정답을 베끼지 않음</text>
+  </g>
+  <path class="arrow" d="M355 540 H390"/>
+
+  <!-- stage 1 -->
+  <g filter="url(#shadow)">
+    <rect x="845" y="165" width="410" height="1210" rx="18" fill="#fff" stroke="#0f766e" stroke-width="2"/>
+    <rect x="845" y="165" width="410" height="68" rx="18" fill="#0f766e"/>
+    <text x="1050" y="208" text-anchor="middle" class="head">#1 · 082 정합성</text>
+    <rect x="873" y="270" width="354" height="152" rx="13" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="897" y="311" class="tcode">CODE · 082 후보 + ShelfSnapshot</text>
+    <text x="897" y="349" class="body">h = 306.446</text><text x="897" y="381" class="small">본교 그 h의 고정 표본 최대 40권</text>
+    <path class="arrow" d="M1050 422 V460"/>
+    <rect x="873" y="460" width="354" height="205" rx="13" fill="#f5f3ff" stroke="#c4b5fd"/>
+    <text x="897" y="501" class="tllm">LLM-F × 1</text>
+    <text x="897" y="539" class="body">입력: 책 내용 + 306.446 서가</text><text x="897" y="570" class="small">다른 후보·출처·082 점수는 보지 않음</text>
+    <text x="897" y="614" class="small">각 h에 대해 똑같은 질문을 한 번만</text>
+    <path class="arrow" d="M1050 665 V705"/>
+    <rect x="873" y="705" width="354" height="300" rx="13" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="897" y="746" class="section">출력 1건: ShelfFitAssessment</text>
+    <text x="897" y="786" class="mini">{</text>
+    <text x="915" y="813" class="mini">"h": "306.446",</text>
+    <text x="915" y="838" class="mini">"shelf_label": "이중·다중언어의</text>
+    <text x="915" y="860" class="mini">사회적 사용과 정체성",</text>
+    <text x="915" y="886" class="mini">"shelf_fit": 0.82,</text>
+    <text x="915" y="912" class="mini">"fit_reasoning": "...",</text>
+    <text x="915" y="938" class="mini">"cited_books": ["..."]</text>
+    <text x="897" y="973" class="mini">}</text>
+    <text x="897" y="1040" class="small">이 객체가 이후 후보 벡터의 첫 줄이 됨</text>
+    <rect x="873" y="1050" width="354" height="152" rx="13" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+    <text x="897" y="1090" class="tthreshold">CODE · T1 = 0.92 조기 종료 게이트</text>
+    <text x="897" y="1127" class="small">082 fit ≥ 0.92 → 조기 확정 가능</text>
+    <text x="897" y="1154" class="small">082 fit &lt; 0.92 → #2 종합서지로 진행</text>
+    <text x="897" y="1181" class="small">현재: early_stop=off → 항상 #2로 계속</text>
+  </g>
+
+  <!-- stage 2 -->
+  <g filter="url(#shadow)">
+    <rect x="1295" y="165" width="410" height="1210" rx="18" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="1295" y="165" width="410" height="68" rx="18" fill="#7c3aed"/>
+    <text x="1500" y="208" text-anchor="middle" class="head">#2 · 082 + 종합서지 정합성</text>
+    <rect x="1323" y="270" width="354" height="172" rx="13" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="1347" y="311" class="tcode">CODE · 종합서지 득표 상위 3위</text>
+    <text x="1347" y="350" class="body">새 후보 h만 추가</text>
+    <text x="1347" y="381" class="small">예: 401.93 · 407 · …</text><text x="1347" y="410" class="small">이미 평가한 306.446은 다시 만들지 않음</text>
+    <path class="arrow" d="M1500 442 V478"/>
+    <rect x="1323" y="478" width="354" height="187" rx="13" fill="#f5f3ff" stroke="#c4b5fd"/>
+    <text x="1347" y="519" class="tllm">LLM-F × 종합서지 새 h 수</text>
+    <text x="1347" y="558" class="body">401.93, 407 … 각각에</text><text x="1347" y="588" class="body">책 1권 × 그 서가 40권</text>
+    <text x="1347" y="629" class="small">각 호출의 출력 형식은 #1과 완전히 동일</text>
+    <path class="arrow" d="M1500 665 V705"/>
+    <rect x="1323" y="705" width="354" height="300" rx="13" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="1347" y="746" class="section">누적 출력: 후보 점수 벡터</text>
+    <text x="1347" y="788" class="mini">[</text>
+    <text x="1365" y="815" class="mini">{ h: "306.446", label: "…", fit: .82 },</text>
+    <text x="1365" y="842" class="mini">{ h: "401.93",  label: "…", fit: .84 },</text>
+    <text x="1365" y="869" class="mini">{ h: "407",     label: "…", fit: .83 }</text>
+    <text x="1347" y="895" class="mini">]</text>
+    <text x="1347" y="952" class="small">#1의 306.446 점수는 그대로 보존</text><text x="1347" y="979" class="small">새 h의 Assessment만 뒤에 더해짐</text>
+    <rect x="1323" y="1038" width="354" height="158" rx="13" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+    <text x="1347" y="1078" class="tthreshold">CODE · T2 = 0.82 키워드 실행 게이트</text>
+    <text x="1347" y="1115" class="small">top &lt; 0.82 → 아래 #3 키워드 확장 필수</text>
+    <text x="1347" y="1142" class="small">top ≥ 0.82 → 후보 있음 (생략은 추후 검증)</text>
+    <text x="1347" y="1169" class="small">현재 보정 회차: 항상 #3까지 실행</text>
+  </g>
+  <path class="arrow" d="M1255 865 H1290"/>
+
+  <!-- stage 3 -->
+  <g filter="url(#shadow)">
+    <rect x="1745" y="165" width="470" height="1210" rx="18" fill="#fff" stroke="#d97706" stroke-width="2"/>
+    <rect x="1745" y="165" width="470" height="68" rx="18" fill="#d97706"/>
+    <text x="1980" y="208" text-anchor="middle" class="head">#3 · 082 + 종합서지 + 키워드 정합성</text>
+    <rect x="1773" y="270" width="197" height="260" rx="13" fill="#f5f3ff" stroke="#c4b5fd"/>
+    <text x="1795" y="311" class="tllm">LLM-K × 1</text>
+    <text x="1795" y="350" class="body">책 내용만</text><text x="1795" y="379" class="body">→ 검색어</text>
+    <text x="1795" y="424" class="small">이중언어</text><text x="1795" y="450" class="small">bilingualism</text><text x="1795" y="476" class="small">sociolinguistics</text><text x="1795" y="502" class="small">multilingualism</text>
+    <rect x="1990" y="270" width="197" height="260" rx="13" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="2012" y="311" class="tcode">CODE · 본교 검색</text>
+    <text x="2012" y="350" class="body">제목 + MARC 650</text><text x="2012" y="379" class="body">h별로 묶기</text>
+    <text x="2012" y="424" class="small">2개 이상 일치 우선</text><text x="2012" y="451" class="small">새 h: 400.42 …</text><text x="2012" y="492" class="small">기존 h는 출처만 합침</text>
+    <path class="arrow" d="M1970 400 H1985"/>
+    <path class="arrow" d="M1980 530 V570"/>
+    <rect x="1773" y="570" width="414" height="185" rx="13" fill="#f5f3ff" stroke="#c4b5fd"/>
+    <text x="1797" y="611" class="tllm">LLM-F × 키워드가 새로 찾은 h 수</text>
+    <text x="1797" y="650" class="body">400.42 … 각각을 #1과 같은 방식으로 평가</text>
+    <text x="1797" y="682" class="small">새 h마다 shelf_label · shelf_fit · reasoning · cited_books</text>
+    <text x="1797" y="720" class="small">기존 후보는 절대 재평가하지 않음</text>
+    <path class="arrow" d="M1980 755 V795"/>
+    <rect x="1773" y="795" width="414" height="210" rx="13" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="1797" y="836" class="section">최종 누적 벡터</text>
+    <text x="1797" y="877" class="mini">[ #1의 Assessment, #2의 새 Assessment,</text>
+    <text x="1797" y="902" class="mini">  { h: "400.42", label: "이중언어 교육·연구",</text>
+    <text x="1797" y="927" class="mini">    fit: .84, reasoning: "...", cited_books: [...] } ]</text>
+    <text x="1797" y="970" class="small">모든 후보가 같은 40권·같은 루브릭 눈금</text>
+  </g>
+  <path class="arrow" d="M1705 865 H1740"/>
+
+  <!-- result -->
+  <g filter="url(#shadow)">
+    <rect x="2255" y="165" width="300" height="1210" rx="18" fill="#fff" stroke="#0f766e" stroke-width="2"/>
+    <rect x="2255" y="165" width="300" height="68" rx="18" fill="#0f766e"/>
+    <text x="2405" y="208" text-anchor="middle" class="head">CODE + 사서</text>
+    <rect x="2280" y="270" width="250" height="130" rx="13" fill="#ecfeff" stroke="#5eead4"/>
+    <text x="2304" y="311" class="tcode">CODE · 후보 정렬</text>
+    <text x="2304" y="350" class="body">shelf_fit 내림차순</text>
+    <text x="2304" y="383" class="small">LLM은 순위·자동확정을 결정하지 않음</text>
+    <rect x="2280" y="420" width="250" height="96" rx="13" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+    <text x="2304" y="456" class="tthreshold">CODE · 점수 + gap 최종 검토</text>
+    <text x="2304" y="483" class="small">T2=.82는 후보 확장 참고값</text>
+    <text x="2304" y="507" class="small">현재: 자동확정 없이 사서 검토</text>
+    <rect x="2280" y="532" width="250" height="246" rx="13" fill="#fff7ed" stroke="#ea580c"/>
+    <text x="2304" y="573" class="thitl">파일럿: HITL 사서 검토</text>
+    <text x="2304" y="613" class="body">후보·label·점수·근거</text><text x="2304" y="641" class="body">를 나란히 보고 확정</text>
+    <text x="2304" y="690" class="small">현재 자동확정은 기본 off</text><text x="2304" y="718" class="small">T2는 참고값으로만 표시</text>
+    <rect x="2280" y="821" width="250" height="155" rx="13" fill="#f0fdf4" stroke="#22c55e"/>
+    <text x="2304" y="861" class="section">사서 최종 확정</text><text x="2304" y="898" class="small">예: 306.446 유지</text><text x="2304" y="928" class="small">또는 다른 후보로 수정</text>
+    <rect x="2280" y="1020" width="250" height="220" rx="13" fill="#fff" stroke="#d97706" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="2304" y="1061" class="section">미래 확장</text>
+    <text x="2304" y="1100" class="small">① 판단 사례 참조</text><text x="2304" y="1125" class="mini">사서 확정·수정 이유 → ledger</text>
+    <text x="2304" y="1168" class="small">② edge-case 재분류</text><text x="2304" y="1193" class="mini">키워드 결과의 고립 1권 →</text><text x="2304" y="1216" class="mini">기존 장서 사서 검토 큐</text>
+  </g>
+  <path class="arrow" d="M2215 900 H2250"/>
+
+  <!-- footer -->
+  <rect x="395" y="1420" width="2160" height="126" rx="16" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="430" y="1443" width="92" height="30" rx="7" fill="#2563eb"/><text x="476" y="1465" text-anchor="middle" class="tag">CODE</text>
+  <text x="540" y="1466" class="body">후보 탐색 · h 중복 병합 · 40권 표본 · 점수 정렬 · 사서 이관</text>
+  <rect x="1280" y="1443" width="82" height="30" rx="7" fill="#7c3aed"/><text x="1321" y="1465" text-anchor="middle" class="tag">LLM</text>
+  <text x="1380" y="1463" class="body">LLM-K — 책 내용 → 검색어 3~5개</text>
+  <text x="1380" y="1492" class="body">LLM-F — 책 1권 + 서가 h 1곳 → label · fit · 근거 · 인용책</text>
+  <text x="430" y="1525" class="small">분리 원칙: 082는 CODE의 후보 힌트이며, LLM-F는 책 내용과 해당 h의 서가 표본만 본다. 점선 테두리는 실제 사서 확정 뒤의 기관 지식 확장이다.</text>
+</svg>

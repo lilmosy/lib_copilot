@@ -1,0 +1,8 @@
+openai>=1.109         # 기본 LLM(gpt-5.6-terra)
+anthropic>=0.69       # 선택 LLM(Claude 비교 실험)
+pydantic>=2.0         # 데이터 계약 (src/schema.py)
+python-dotenv>=1.0    # .env 로드
+pandas>=2.0           # sogang_db 내부 전용 — DataFrame은 그 파일 밖으로 안 나간다
+streamlit>=1.40       # 데모 화면 (app.py)
+requests>=2.31        # crawler
+beautifulsoup4>=4.12  # crawler

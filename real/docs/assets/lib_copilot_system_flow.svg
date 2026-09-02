@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1180" viewBox="0 0 1800 1180" role="img" aria-labelledby="title desc">
+  <title id="title">lib_copilot 독립 Shelf Fit 분류 시스템 흐름</title>
+  <desc id="desc">신규 책 입력부터 후보 탐색, 독립 shelf fit, 코드의 정책 판단, 사서 검토와 미래 지식 축적까지의 흐름이다.</desc>
+  <defs>
+    <style>
+      .bg { fill:#f8fafc; }
+      .title { font:700 42px Arial, 'Noto Sans KR', sans-serif; fill:#112b57; }
+      .sub { font:500 21px Arial, 'Noto Sans KR', sans-serif; fill:#50627e; }
+      .lane { font:700 20px Arial, 'Noto Sans KR', sans-serif; fill:#46556d; }
+      .head { font:700 24px Arial, 'Noto Sans KR', sans-serif; fill:#fff; }
+      .body { font:500 18px Arial, 'Noto Sans KR', sans-serif; fill:#1e293b; }
+      .small { font:500 15px Arial, 'Noto Sans KR', sans-serif; fill:#475569; }
+      .tag { font:700 16px Arial, 'Noto Sans KR', sans-serif; fill:#fff; }
+      .future { font:500 16px Arial, 'Noto Sans KR', sans-serif; fill:#4d6b50; }
+      .arrow { stroke:#50627e; stroke-width:3.5; fill:none; marker-end:url(#arrow); }
+      .dash { stroke:#d97706; stroke-width:3; fill:none; stroke-dasharray:9 8; marker-end:url(#arrowOrange); }
+    </style>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#94a3b8" flood-opacity=".22"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#50627e"/></marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#d97706"/></marker>
+  </defs>
+  <rect class="bg" width="1800" height="1180"/>
+  <text x="900" y="65" text-anchor="middle" class="title">lib_copilot · 독립 Shelf Fit 분류 흐름</text>
+  <text x="900" y="102" text-anchor="middle" class="sub">후보 탐색은 CODE · 적합도 평가는 LLM · 자동확정/사서 이관은 CODE 정책</text>
+
+  <rect x="28" y="150" width="150" height="750" rx="16" fill="#eef5ff" stroke="#93b7eb"/>
+  <text x="103" y="195" text-anchor="middle" class="lane">입력·데이터</text>
+  <text x="103" y="225" text-anchor="middle" class="lane">계층</text>
+  <rect x="28" y="925" width="150" height="190" rx="16" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="103" y="970" text-anchor="middle" class="lane">미래 운영</text>
+  <text x="103" y="1000" text-anchor="middle" class="lane">지식 계층</text>
+
+  <!-- input -->
+  <g filter="url(#shadow)">
+    <rect x="210" y="150" width="235" height="205" rx="14" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+    <rect x="210" y="150" width="235" height="54" rx="14" fill="#1d4ed8"/>
+    <text x="327" y="185" text-anchor="middle" class="head">신규 도서 입력</text>
+    <text x="327" y="238" text-anchor="middle" class="body">제목 · 부제 · 저자</text>
+    <text x="327" y="267" text-anchor="middle" class="body">책소개 · 목차 · 원제</text>
+    <text x="327" y="307" text-anchor="middle" class="small">082는 후보 탐색의 출발점</text>
+  </g>
+
+  <!-- inheritance -->
+  <g filter="url(#shadow)">
+    <rect x="500" y="150" width="245" height="205" rx="14" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+    <rect x="500" y="150" width="245" height="54" rx="14" fill="#2563eb"/>
+    <text x="622" y="185" text-anchor="middle" class="head">CODE · 0차 승계</text>
+    <text x="622" y="240" text-anchor="middle" class="body">기존 판본·원서 검색</text>
+    <text x="622" y="270" text-anchor="middle" class="body">있으면 청구기호 승계</text>
+    <text x="622" y="310" text-anchor="middle" class="small">LLM 호출 없음</text>
+  </g>
+  <path class="arrow" d="M445 252 H495"/>
+  <path class="arrow" d="M622 355 V410 H1570 V355"/>
+  <text x="1090" y="397" text-anchor="middle" class="small">없으면 3단계 후보 탐색으로 진행</text>
+  <g filter="url(#shadow)">
+    <rect x="1480" y="150" width="250" height="205" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <rect x="1480" y="150" width="250" height="54" rx="14" fill="#16a34a"/>
+    <text x="1605" y="185" text-anchor="middle" class="head">승계 결과</text>
+    <text x="1605" y="244" text-anchor="middle" class="body">기존 번호 그대로</text>
+    <text x="1605" y="274" text-anchor="middle" class="body">결정론적 확정</text>
+  </g>
+  <path class="arrow" d="M745 252 H1475"/>
+  <text x="1110" y="238" text-anchor="middle" class="small">발견</text>
+
+  <!-- stage 1 -->
+  <g filter="url(#shadow)">
+    <rect x="210" y="455" width="280" height="230" rx="14" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+    <rect x="210" y="455" width="280" height="54" rx="14" fill="#2563eb"/>
+    <text x="350" y="490" text-anchor="middle" class="head">1 · CODE 후보 생성</text>
+    <text x="350" y="545" text-anchor="middle" class="body">082 번호대 확인</text>
+    <text x="350" y="577" text-anchor="middle" class="body">해당 h의 고정 표본 40권</text>
+    <text x="350" y="625" text-anchor="middle" class="small">본교에 0권이면 fit 호출 생략</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="550" y="455" width="280" height="230" rx="14" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="550" y="455" width="280" height="54" rx="14" fill="#7c3aed"/>
+    <text x="690" y="490" text-anchor="middle" class="head">LLM-F · 독립 fit</text>
+    <text x="690" y="545" text-anchor="middle" class="body">신규 책 1권 × 서가 h 1곳</text>
+    <text x="690" y="577" text-anchor="middle" class="body">shelf_fit · 근거 · 인용책</text>
+    <text x="690" y="625" text-anchor="middle" class="small">다른 후보를 보지 않는 1회 평가</text>
+  </g>
+  <path class="arrow" d="M490 570 H545"/>
+
+  <!-- stage 2 -->
+  <g filter="url(#shadow)">
+    <rect x="890" y="455" width="280" height="230" rx="14" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+    <rect x="890" y="455" width="280" height="54" rx="14" fill="#2563eb"/>
+    <text x="1030" y="490" text-anchor="middle" class="head">2 · CODE 후보 확장</text>
+    <text x="1030" y="545" text-anchor="middle" class="body">종합서지 득표 상위 h</text>
+    <text x="1030" y="577" text-anchor="middle" class="body">중복 h는 합치고 새 h만</text>
+    <text x="1030" y="625" text-anchor="middle" class="small">각 h에 같은 40권 표본</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="1230" y="455" width="280" height="230" rx="14" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="1230" y="455" width="280" height="54" rx="14" fill="#7c3aed"/>
+    <text x="1370" y="490" text-anchor="middle" class="head">LLM-F × 새 후보 수</text>
+    <text x="1370" y="545" text-anchor="middle" class="body">새 h마다 독립 호출</text>
+    <text x="1370" y="577" text-anchor="middle" class="body">같은 h는 재평가 안 함</text>
+    <text x="1370" y="625" text-anchor="middle" class="small">단계 안에서는 병렬 호출 가능</text>
+  </g>
+  <path class="arrow" d="M830 570 H885"/><path class="arrow" d="M1170 570 H1225"/>
+
+  <!-- stage 3 -->
+  <g filter="url(#shadow)">
+    <rect x="210" y="745" width="280" height="230" rx="14" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="210" y="745" width="280" height="54" rx="14" fill="#7c3aed"/>
+    <text x="350" y="780" text-anchor="middle" class="head">3 · LLM-K</text>
+    <text x="350" y="835" text-anchor="middle" class="body">책 내용 → 검색어 3~5개</text>
+    <text x="350" y="867" text-anchor="middle" class="body">한국어 + LCSH 영어</text>
+    <text x="350" y="915" text-anchor="middle" class="small">서가·후보는 보지 않음</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="550" y="745" width="280" height="230" rx="14" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+    <rect x="550" y="745" width="280" height="54" rx="14" fill="#2563eb"/>
+    <text x="690" y="780" text-anchor="middle" class="head">CODE · 키워드 검색</text>
+    <text x="690" y="835" text-anchor="middle" class="body">제목·650 주제명 검색</text>
+    <text x="690" y="867" text-anchor="middle" class="body">h별 묶음 · 새 h만 채택</text>
+    <text x="690" y="915" text-anchor="middle" class="small">2개 이상 일치, 부족하면 완화</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="890" y="745" width="280" height="230" rx="14" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="890" y="745" width="280" height="54" rx="14" fill="#7c3aed"/>
+    <text x="1030" y="780" text-anchor="middle" class="head">LLM-F × 새 후보 수</text>
+    <text x="1030" y="835" text-anchor="middle" class="body">키워드가 찾은 새 h 평가</text>
+    <text x="1030" y="867" text-anchor="middle" class="body">동일한 40권·루브릭 유지</text>
+    <text x="1030" y="915" text-anchor="middle" class="small">후보 점수 벡터 완성</text>
+  </g>
+  <path class="arrow" d="M490 860 H545"/><path class="arrow" d="M830 860 H885"/>
+  <path class="arrow" d="M1370 685 V720 H350 V740"/>
+  <text x="830" y="714" text-anchor="middle" class="small">현재 관측 회차: 3단계까지 항상 확장</text>
+
+  <!-- decision -->
+  <g filter="url(#shadow)">
+    <rect x="1230" y="745" width="280" height="230" rx="14" fill="#fff" stroke="#0f766e" stroke-width="2"/>
+    <rect x="1230" y="745" width="280" height="54" rx="14" fill="#0f766e"/>
+    <text x="1370" y="780" text-anchor="middle" class="head">CODE · 업무 결정</text>
+    <text x="1370" y="835" text-anchor="middle" class="body">점수 정렬 · top score</text>
+    <text x="1370" y="867" text-anchor="middle" class="body">gap · T2 · 관찰 모드</text>
+    <text x="1370" y="915" text-anchor="middle" class="small">LLM은 자동확정을 결정하지 않음</text>
+  </g>
+  <path class="arrow" d="M1170 860 H1225"/>
+  <g filter="url(#shadow)">
+    <rect x="1570" y="745" width="200" height="102" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="1670" y="790" text-anchor="middle" class="body">안전한 경우</text>
+    <text x="1670" y="824" text-anchor="middle" class="body">자동확정</text>
+    <rect x="1570" y="873" width="200" height="102" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="1670" y="918" text-anchor="middle" class="body">경합·불확실</text>
+    <text x="1670" y="952" text-anchor="middle" class="body">HITL 사서 검토</text>
+  </g>
+  <path class="arrow" d="M1510 815 H1565"/><path class="arrow" d="M1510 910 H1565"/>
+
+  <!-- future -->
+  <g filter="url(#shadow)">
+    <rect x="250" y="1008" width="470" height="105" rx="14" fill="#fffdf5" stroke="#d97706" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="485" y="1050" text-anchor="middle" class="body">미래 · 사서 판례 ledger</text>
+    <text x="485" y="1083" text-anchor="middle" class="future">실제 확정 사례만 축적 → 같은 경합쌍의 사서 UI 참고</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="800" y="1008" width="470" height="105" rx="14" fill="#fffdf5" stroke="#d97706" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="1035" y="1050" text-anchor="middle" class="body">미래 · 1권 outlier 재분류</text>
+    <text x="1035" y="1083" text-anchor="middle" class="future">고립된 기존 장서 신호 → 자동변경 없이 사서 검토 큐</text>
+  </g>
+  <path class="dash" d="M1670 975 V1060 H1275"/>
+  <path class="dash" d="M1670 975 V1100 H725"/>
+
+  <rect x="1385" y="1022" width="370" height="74" rx="10" fill="#fff" stroke="#cbd5e1"/>
+  <rect x="1400" y="1040" width="70" height="25" rx="5" fill="#2563eb"/><text x="1435" y="1058" text-anchor="middle" class="tag">CODE</text>
+  <rect x="1490" y="1040" width="58" height="25" rx="5" fill="#7c3aed"/><text x="1519" y="1058" text-anchor="middle" class="tag">LLM</text>
+  <rect x="1570" y="1040" width="70" height="25" rx="5" fill="#ea580c"/><text x="1605" y="1058" text-anchor="middle" class="tag">HITL</text>
+  <text x="1575" y="1088" text-anchor="middle" class="small">실선: 현재 동기 흐름 · 점선: 미래 운영 흐름</text>
+</svg>
