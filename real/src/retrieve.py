@@ -134,6 +134,20 @@ def retrieve_keyword(kws: list[str], exclude: set[str],
     "케이스마다 다른 기준으로 뽑힌 후보"가 섞인다. 0개면 0개인 채로 다음으로 간다.
     """
     msgs: list[str] = []
+    # 포함 관계 검색어는 긴 쪽을 버린다(2026-09-03). 'Language acquisition' ⊂
+    # 'Second language acquisition'을 둘 다 받으면, 긴 구절이 적힌 책은 그것만으로
+    # 2-hit을 자동 충족해 min_hit이 그 단어에 한해 무력화된다 — #10 실측에서 이 이중
+    # 카운트가 408.0071을 80권으로 부풀려 컷을 통째로 밀었다(devlog 9-03). 긴 쪽에
+    # 걸리는 책은 짧은 쪽에도 걸리므로 검색 범위는 안 줄고 이중 카운트만 사라진다.
+    # 프롬프트가 이미 금지하는 행동("부분일치로 개수를 채우지 않는다")의 코드 집행이다
+    # — h를 코드가 찍고 cited_books를 코드가 대조하는 것과 같은 원칙(LLM 출력 검증).
+    kws = list(dict.fromkeys(kws))          # 완전 중복도 같은 이중 카운트를 만든다
+    dropped = [a for a in kws
+               if any(b != a and b.casefold() in a.casefold() for b in kws)]
+    if dropped:
+        kws = [a for a in kws if a not in dropped]
+        msgs.append(f"검색어 중복 제거: {', '.join(dropped)} — 남은 검색어에 부분일치로 "
+                    f"포함돼 한 단어로 칩니다(겹침 개수 계산 왜곡 방지).")
     min_hit = KEYWORD_MIN_HIT
     rows = sogang_db.search_by_keywords(kws, min_hit=min_hit, holdout=holdout)
     fresh = [(h, n) for h, n in rows if h not in exclude]
